@@ -7,3 +7,15 @@
 <div class="text-center">
     <h1 class="display-4">Authentication Demo App</h1>
 </div>
+
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <p>Welcome, @User.Identity.Name!</p>
+    <form method="post" asp-asp-page-handler="Logout">
+        <button type="submit">Logout</button>
+    </form>
+}
+else
+{
+    <a asp-asp-page-handler="Login">Login with Google</a>
+}

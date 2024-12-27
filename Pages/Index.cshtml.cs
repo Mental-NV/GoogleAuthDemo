@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,8 +13,13 @@ public class IndexModel : PageModel
         _logger = logger;
     }
 
-    public void OnGet()
+    public IActionResult OnGetLogin()
     {
+        return Challenge(new AuthenticationProperties { RedirectUri = "/" }, "Google");
+    }
 
+    public IActionResult OnPostLogout()
+    {
+        return SignOut(new AuthenticationProperties { RedirectUri = "/" }, "Cookies");
     }
 }
